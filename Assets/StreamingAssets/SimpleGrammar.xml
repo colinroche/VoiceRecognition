@@ -1,26 +1,225 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 
-<grammar xml:lang="en" root="yesorno"
+<grammar xml:lang="en" root="command"
 tag-format="semantics/1.0" version="1.0"
 xmlns="http://www.w3.org/2001/06/grammar">
 
-  <rule id="yesorno">
+  <rule id="command">
     <one-of>
       <item>
-        <ruleref uri="#yes"/>
+        <ruleref uri="#rotate"/>
       </item>
       <item>
-        <ruleref uri="#no"/>
+        <ruleref uri="#movement"/>
+      </item>
+      <item>
+        <ruleref uri="#openDoor"/>
+      </item>
+      <item>
+        <ruleref uri="#pauseState"/>
+      </item>
+      <item>
+        <ruleref uri="#menuState"/>
+      </item>
+      <!--<item>
+        <ruleref uri="#tutorialState"/>
+      </item>-->
+    </one-of>
+  </rule>
+
+  <rule id="rotate">
+    <one-of>
+      <item>
+        <tag>out.action = "left";</tag>
+        <one-of>
+          <item> Left </item>
+          <item> Turn Left </item>
+        </one-of>
+      </item>
+      <item>
+        <tag>out.action = "right";</tag>
+        <one-of>
+          <item> Right </item>
+          <item> Turn Right </item>
+        </one-of>
       </item>
     </one-of>
   </rule>
 
-  <rule id="yes">
-    <item>yes</item>
+  <rule id="movement">
+    <one-of>
+      <item>
+        <tag>out.action = "forward";</tag>
+        <one-of>
+          <item> Forward </item>
+          <item> Move </item>
+        </one-of>
+      </item>
+      <item>
+        <tag>out.action = "stop";</tag>
+        <one-of>
+          <item> Stop </item>
+          <item> Stop Moving </item>
+        </one-of>
+      </item>
+    </one-of>
   </rule>
 
-  <rule id="no">
-    <item>no</item>
+
+  <rule id="openDoor">
+    <one-of>
+      <item>
+        <tag>out.action = "mountains";</tag>
+        <one-of>
+          <item> Mountains </item>
+        </one-of>
+      </item>
+      <item>
+        <tag>out.action = "house";</tag>
+        <one-of>
+          <item> House </item>
+        </one-of>
+      </item>
+      <item>
+        <tag>out.action = "flowers";</tag>
+        <one-of>
+          <item> Flowers </item>
+        </one-of>
+      </item>
+      <item>
+        <tag>out.action = "sunrise";</tag>
+        <one-of>
+          <item> Sunrise </item>
+        </one-of>
+      </item>
+      <item>
+        <tag>out.action = "trees";</tag>
+        <one-of>
+          <item> Trees </item>
+        </one-of>
+      </item>
+      <item>
+        <tag>out.action = "cliffs";</tag>
+        <one-of>
+          <item> Cliffs </item>
+        </one-of>
+      </item>
+      <item>
+        <tag>out.action = "bay";</tag>
+        <one-of>
+          <item> Bay </item>
+        </one-of>
+      </item>
+    </one-of>
+  </rule>
+
+  <rule id="pauseState">
+    <one-of>
+      <item>
+        <tag>out.action = "pause";</tag>
+        <one-of>
+          <item> Pause Menu</item>
+          <item> Pause </item>
+        </one-of>
+      </item>
+
+      <item>
+        <tag>out.action = "resume";</tag>
+        <one-of>
+          <item> Resume </item>
+          <item> Continue </item>
+          <item> Back </item>
+        </one-of>
+      </item>
+
+      <item>
+        <tag>out.action = "input";</tag>
+        <one-of>
+          <item> Input Controls </item>
+          <item> Input </item>
+        </one-of>
+      </item>
+
+      <item>
+        <tag>out.action = "voice";</tag>
+        <one-of>
+          <item> Voice Controls </item>
+          <item> Voice </item>
+        </one-of>
+      </item>
+
+      <item>
+        <tag>out.action = "menu";</tag>
+        <one-of>
+          <item> Main Menu </item>
+          <item> Menu </item>
+          <item> Exit </item>
+          <item> Quit </item>
+        </one-of>
+      </item>
+    </one-of>
+  </rule>
+
+  <rule id="menuState">
+    <one-of>
+      <item>
+        <tag>out.action = "game";</tag>
+        <one-of>
+          <item> Start Game </item>
+          <item> Play Game </item>
+        </one-of>
+      </item>
+
+      <item>
+        <tag>out.action = "tutorial";</tag>
+        <one-of>
+          <item> Start Tutorial </item>
+          <item> Play Tutorial </item>
+          <item> Tutorial </item>
+        </one-of>
+      </item>
+
+      <item>
+        <tag>out.action = "settings";</tag>
+        <one-of>
+          <item> Settings </item>
+          <item> Controls </item>
+        </one-of>
+      </item>
+    </one-of>
+  </rule>
+
+  <rule id="tutorialState">
+    <one-of>
+      <item>
+        <tag>out.action = "leftTutorial";</tag>
+        <one-of>
+          <item> Left </item>
+          <item> Turn Left </item>
+        </one-of>
+      </item>
+      <item>
+        <tag>out.action = "rightTutorial";</tag>
+        <one-of>
+          <item> Right </item>
+          <item> Turn Right </item>
+        </one-of>
+      </item>
+            <item>
+        <tag>out.action = "forwardTutorial";</tag>
+        <one-of>
+          <item> Forward </item>
+          <item> Move </item>
+        </one-of>
+      </item>
+      <item>
+        <tag>out.action = "stopTutorial";</tag>
+        <one-of>
+          <item> Stop </item>
+          <item> Stop Moving </item>
+        </one-of>
+      </item>
+    </one-of>
   </rule>
 
 </grammar>

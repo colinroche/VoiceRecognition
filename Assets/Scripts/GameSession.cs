@@ -9,7 +9,6 @@ public class GameSession : MonoBehaviour
     [SerializeField] GameObject menuPersists;
     [SerializeField] GameObject objectPersists;
     [SerializeField] GameObject end;
-    [SerializeField] GameObject playerCanvas;
     [SerializeField] GameObject player;
 
     [SerializeField] Text playerPrompt;
@@ -30,7 +29,6 @@ public class GameSession : MonoBehaviour
 
     public void ResetGameSession()
     {
-        playerCanvas.SetActive(false);
         Destroy(menuPersists);
         Destroy(objectPersists);
         Destroy(gameObject);
@@ -39,17 +37,7 @@ public class GameSession : MonoBehaviour
 
     public void EndGame()
     {
-        playerCanvas.SetActive(false);
         end.SetActive(true);
-    }
-
-    public void Pause()
-    {
-        playerCanvas.SetActive(false);
-    }
-    public void Resume()
-    {
-        playerCanvas.SetActive(true);
     }
 
     public void OpenDoor(string word)

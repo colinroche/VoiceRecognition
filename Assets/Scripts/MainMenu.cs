@@ -9,10 +9,12 @@ public class MainMenu : MonoBehaviour
     [SerializeField] GameObject tutorialDoors;
     [SerializeField] GameObject player;
     [SerializeField] GameObject menu;
+    [SerializeField] GameObject tutorialCanvas;
 
     public void PlayTutorial()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        tutorialCanvas.SetActive(true);
         gameDoors.SetActive(false);
         tutorialDoors.SetActive(true);
         player.SetActive(true);
@@ -21,6 +23,7 @@ public class MainMenu : MonoBehaviour
     public void PlayGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 2);
+        //tutorialCanvas.SetActive(false);
         gameDoors.SetActive(true);
         tutorialDoors.SetActive(false);
         player.SetActive(true);

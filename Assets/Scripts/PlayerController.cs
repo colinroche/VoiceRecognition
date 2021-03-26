@@ -6,7 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     CharacterController myController;
 
-    private float movementSpeed = 3.5f;
+    private float movementSpeed = 0f;
     private float rotationSpeed = 1.5f;
 
     Quaternion startAngle = Quaternion.Euler (0,0,0);
@@ -18,13 +18,8 @@ public class PlayerController : MonoBehaviour
     //movement Vector
     private Vector3 moving;
 
-    [SerializeField] GameObject door_2;
-    [SerializeField] GameObject door_3;
-    [SerializeField] GameObject door_4;
-    [SerializeField] GameObject door_5;
-    [SerializeField] GameObject door_6;
-    [SerializeField] GameObject door_7;
-    [SerializeField] GameObject door_8;
+    [SerializeField] GameObject playerCanvas;
+    [SerializeField] GameObject tutorialCanvas;
 
     private void Start()
     {
@@ -39,13 +34,32 @@ public class PlayerController : MonoBehaviour
         PlayerRotation();
     }
 
-    private void Movement()
+    public void Movement()
     {
-        moving = new Vector3(0, 0, Input.GetAxis("Vertical")*movementSpeed);
+        moving = new Vector3(0, 0, movementSpeed);
         moving = transform.rotation * moving;
 
         //move
         myController.Move(moving * Time.deltaTime);
+
+        if(Input.GetKeyDown(KeyCode.W))
+        {
+            SetMovement();
+        }
+        else if (Input.GetKeyDown(KeyCode.S))
+        {
+            StopMovement();
+        }
+    }
+
+    public void SetMovement()
+    {
+        movementSpeed = 2.5f;
+    }
+
+    public void StopMovement()
+    {
+        movementSpeed = 0f;
     }
 
     private void PlayerRotation()
@@ -59,11 +73,10 @@ public class PlayerController : MonoBehaviour
         {
             ChangeAngleLeft();
         }
-        this.transform.rotation = Quaternion.Slerp (this.transform.rotation,currentAngle,0.05f);
-        //transform.Rotate(new Vector3(0, Input.GetAxis("Horizontal")*rotationSpeed, 0));
+        this.transform.rotation = Quaternion.Slerp (this.transform.rotation,currentAngle,0.03f);
     }
 
-    void ChangeAngleLeft()
+    public void ChangeAngleLeft()
     {
         if(currentAngle.eulerAngles.y == startAngle.eulerAngles.y)
         {
@@ -82,7 +95,7 @@ public class PlayerController : MonoBehaviour
             currentAngle = startAngle;
         }
     }
-    void ChangeAngleRight()
+    public void ChangeAngleRight()
     {
         if(currentAngle.eulerAngles.y == startAngle.eulerAngles.y)
         {
@@ -106,43 +119,39 @@ public class PlayerController : MonoBehaviour
     {
         if (other.tag == "Painting1")
         {
+            playerCanvas.SetActive(true);
             FindObjectOfType<GameSession>().OpenDoor("MOUNTAINS");
-            FindObjectOfType<PaintingBehaviour>().CheckDoor(door_2);
         }
         if (other.tag == "Painting2")
         {
+            playerCanvas.SetActive(true);
             FindObjectOfType<GameSession>().OpenDoor("HOUSE");
-            FindObjectOfType<PaintingBehaviour>().CheckDoor(door_3);
         }
         if (other.tag == "Painting3")
         {
+            playerCanvas.SetActive(true);
             FindObjectOfType<GameSession>().OpenDoor("FLOWERS");
-            FindObjectOfType<PaintingBehaviour>().CheckDoor(door_4);
         }
         if (other.tag == "Painting4")
         {
+            playerCanvas.SetActive(true);
             FindObjectOfType<GameSession>().OpenDoor("SUNRISE");
-            FindObjectOfType<PaintingBehaviour>().CheckDoor(door_5);
         }
         if (other.tag == "Painting5")
         {
+            playerCanvas.SetActive(true);
             FindObjectOfType<GameSession>().OpenDoor("TREES");
-            FindObjectOfType<PaintingBehaviour>().CheckDoor(door_6);
         }
         if (other.tag == "Painting6")
         {
+            playerCanvas.SetActive(true);
             FindObjectOfType<GameSession>().OpenDoor("CLIFFS");
-            FindObjectOfType<PaintingBehaviour>().CheckDoor(door_7);
-        }
-        if (other.tag == "Painting7")
-        {
-            FindObjectOfType<GameSession>().OpenDoor("CLIFFS");
-            FindObjectOfType<PaintingBehaviour>().CheckDoor(door_7);
         }
         if (other.tag == "PaintingTutorial")
         {
+            playerCanvas.SetActive(true);
+            tutorialCanvas.SetActive(false);
             FindObjectOfType<GameSession>().OpenDoor("BAY");
-            FindObjectOfType<PaintingBehaviour>().CheckDoor(door_8);
         }
 
         if (other.tag == "EndTutorial")

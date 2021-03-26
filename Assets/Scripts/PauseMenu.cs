@@ -26,22 +26,25 @@ public class PauseMenu : MonoBehaviour
 
     public void ResumeGame()
     {
-        FindObjectOfType<GameSession>().Resume();
         pauseMenu.SetActive(false);
         Time.timeScale = 1f;
         GameIsPaused = false;
     }
 
-    void PauseGame()
+    public void PauseGame()
     {
         scene = SceneManager.GetActiveScene().buildIndex;
         if (scene != 0)
         {
-            FindObjectOfType<GameSession>().Pause();
             pauseMenu.SetActive(true);
             Time.timeScale = 0f;
             GameIsPaused = true;
         }
+    }
+
+    public void Settings()
+    {
+        Time.timeScale = 0f;
     }
 
     public void QuitGame()
